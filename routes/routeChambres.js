@@ -25,6 +25,6 @@ routeur.get('/chambres/:id', ControllerChambres.chambreUnique);
 
 
 //route pour supprimer une chambre
-
+"test"
 
 export default routeur;
