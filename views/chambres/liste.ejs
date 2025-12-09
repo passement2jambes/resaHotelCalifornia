@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .btn { padding: 5px 10px; text-decoration: none; border-radius: 4px; margin-right: 5px; }
+        .btn-view { background-color: #3498db; color: white; }
+        .btn-edit { background-color: #f39c12; color: white; }
+        .btn-delete { background-color: #e74c3c; color: white; border: none; cursor: pointer; }
+        .actions { display: flex; align-items: center; }
+    </style>
+</head>
+<body>
+
+    <h1>Gestion des Chambres - Hôtel California</h1>
+
+    <a href="/chambres/create" style="display:inline-block; margin-bottom: 20px;">
+        + Ajouter une nouvelle chambre
+    </a>
+
+    <% if (typeof chambres !== 'undefined' && chambres.length > 0) { %>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Capacité</th>
+                    <th>Disponibilité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% chambres.forEach(function(chambres) { %>
+                    <tr>
+                        <td><%= chambres.numero %></td>
+                        <td><%= chambres.capacite %> Personne(s)</td>
+                        <td>
+                            <%= chambres.disponibilite ? 'Libre' : 'Occupée' %>
+                        </td>
+                        <td class="actions">
+                            <a href="/chambres/<%= chambres.idChambre %>" class="btn btn-view">Voir</a>
+
+                            <a href="/chambres/update/<%= chambres.idChambre %>" class="btn btn-edit">Modifier</a>
+
+                            <form action="/chambres/delete/<%= chambres.idChambre %>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer la chambre <%= chambres.numero %> ?');">
+                                <button type="submit" class="btn btn-delete">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+    <% } else { %>
+        <p>Aucune chambre enregistrée pour le moment.</p>
+    <% } %>
+
+</body>
+</html>

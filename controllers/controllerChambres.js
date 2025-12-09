@@ -7,7 +7,7 @@ class ControllerChambres {
     static async listChambres(req, res) {
         try {
             const chambres = await modelChambres.findall();
-            res.render('chambres/list', { title: 'Toutes les chambres', chambres });
+            res.render('chambres/liste', { title: 'Toutes les chambres', chambres });
         } catch (error) {
             console.error('Erreur:', error);
             res.status(500).send('Erreur serveur');
