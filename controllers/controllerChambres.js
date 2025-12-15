@@ -46,13 +46,43 @@ class ControllerChambres {
     //Créer une chambre
 
     static async createChambre(req, res) { // Méthode pour créer une nouvelle chambre
-        const data = { // Récupère les données du formulaire
-            numero: req.body.numero,
-            capacite: req.body.capacite,
-            disponibilite: req.body.disponibilite
-        };
-        await modelChambres.create(data); // Appelle la méthode create du modèle pour insérer une nouvelle chambre
-        res.redirect('/chambres'); // Redirige vers la liste des chambres après la création
+        const {numero, capacite, disponibilite} = req.body; //recupère les données 
+
+        try { //filtres
+
+            if (parseInt(numero) <=0 || parseInt(numero) > 2000) {
+                return res.render('chambres/create', {
+                    title: 'Ajouter une chambre',
+                    error: 'Le numéro de chambre doit être entre 1 et 2000.',
+                    data: req.body //sert a renvoyer le contenu du formulaire déjà rempli
+                });
+            }
+
+            if (parseInt(capacite) <=0 || parseInt(capacite) > 6) {
+                return res.render ('chambres/create', {
+                    title: 'Ajouter une chambre',
+                    error: 'La chambre ne peut accueillir qu\'un maximum de 6 personnes.',
+                    data: req.body
+                });
+            }
+
+            
+
+            await modelChambres.create({ numero, capacite, disponibilite }); // méthode create pour insérer une nouvelle chambre
+
+            res.redirect('/chambres');
+
+        }
+        catch (error) {
+            // Si le modèle plante
+            console.error(error);
+            res.render('chambres/create', {
+                title: 'Ajouter une chambre',
+                error: 'Erreur technique lors de la creation de la chambre',
+                data: req.body
+            });
+
+        }
     }
 
 
