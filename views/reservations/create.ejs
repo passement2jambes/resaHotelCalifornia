@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+</head>
+<body>
+  <h1><%= title %></h1>
+
+  <% if (errors && errors.length) { %>
+    <ul style="color:red;">
+      <% errors.forEach(e => { %>
+        <li><%= e %></li>
+      <% }); %>
+    </ul>
+  <% } %>
+
+  <form action="/reservations/create" method="post">
+    <div>
+      <label for="idClient">Client</label>
+      <select name="idClient" id="idClient">
+        <option value="">-- Sélectionner un client --</option>
+        <% clients.forEach(c => { %>
+          <option value="<%= c.idClient %>"
+            <%= data.idClient == c.idClient ? 'selected' : '' %>>
+            <%= c.nom %>
+          </option>
+        <% }); %>
+      </select>
+    </div>
+
+    <div>
+      <label for="idChambre">Chambre</label>
+      <select name="idChambre" id="idChambre">
+        <option value="">-- Sélectionner une chambre --</option>
+        <% chambres.forEach(ch => { %>
+          <option value="<%= ch.idChambre %>"
+            <%= data.idChambre == ch.idChambre ? 'selected' : '' %>>
+            <%= ch.numero %>
+          </option>
+        <% }); %>
+      </select>
+    </div>
+
+    <div>
+      <label for="dateDebut">Date début</label>
+      <input type="date" id="dateDebut" name="dateDebut"
+             value="<%= data.dateDebut || '' %>">
+    </div>
+
+    <div>
+      <label for="dateFin">Date fin</label>
+      <input type="date" id="dateFin" name="dateFin"
+             value="<%= data.dateFin || '' %>">
+    </div>
+
+    <button type="submit">Enregistrer</button>
+    <a href="/reservations">Annuler</a>
+  </form>
+</body>
+</html>
