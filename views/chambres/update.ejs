@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        /* Juste pour que ça ne pique pas les yeux */
+        body { font-family: sans-serif; padding: 20px; }
+        .error-message { color: red; background: #ffe6e6; padding: 10px; margin-bottom: 15px; border: 1px solid red; }
+        label { display: block; margin-top: 10px; }
+        input, select { padding: 5px; margin-top: 5px; }
+        button { margin-top: 20px; padding: 10px 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>Modifier la chambre</h1>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="error-message">
+            ⚠️ <%= error %>
+        </div>
+    <% } %>
+
+    <form action="/chambres/update/<%= chambre.idChambre %>" method="POST">
+
+        <label for="numero">Numéro :</label>
+        <input type="number" name="numero" id="numero" value="<%= chambre.numero %>" required>
+
+        <label for="capacite">Capacité :</label>
+        <input type="number" name="capacite" id="capacite" value="<%= chambre.capacite %>" required>
+
+        <label for="disponibilite">Statut :</label>
+        <select name="disponibilite" id="disponibilite">
+            <option value="1" <%= chambre.disponibilite == 1 ? 'selected' : '' %>>Libre</option>
+            <option value="0" <%= chambre.disponibilite == 0 ? 'selected' : '' %>>Occupée</option>
+        </select>
+
+        <br>
+        <button type="submit">Sauvegarder</button>
+        <a href="/chambres" style="margin-left: 10px;">Annuler</a>
+
+    </form>
+
+</body>
+</html>

@@ -4,7 +4,7 @@
 import connexion from '../config/connexion.js';
 
 class ModelChambres { // Création du modèle Chambre
-    constructor(data) { // Utilisation du constructeur,data est un objet qui contient les propriétés de la chambre
+    constructor(data) { // Utilisation du constructeur,data = objet contenant les propriétés de la chambre
         this.idChambre = data.idChambre;
         this.numero = data.numero;
         this.capacite = data.capacite;
