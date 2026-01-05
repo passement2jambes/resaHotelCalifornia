@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <style>
+        body { font-family: sans-serif; padding: 40px; text-align: center; }
+        .card { border: 1px solid #ddd; padding: 30px; max-width: 500px; margin: 0 auto; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .warning-box { background-color: #ffe6e6; color: #c0392b; border: 1px solid #e74c3c; padding: 15px; margin: 20px 0; border-radius: 5px; text-align: left; }
+        .btn { padding: 10px 20px; text-decoration: none; border-radius: 5px; border: none; cursor: pointer; font-size: 16px; margin: 5px; }
+        .btn-danger { background-color: #e74c3c; color: white; }
+        .btn-secondary { background-color: #95a5a6; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Supprimer la chambre n°<%= chambre.numero %> ?</h1>
+        <p>Êtes-vous sûr de vouloir supprimer définitivement cette chambre (Capacité : <%= chambre.capacite %>) ?</p>
+
+        <% if (nbReservations > 0) { %>
+            <div class="warning-box">
+                <strong>⚠️ ATTENTION : DANGER !</strong><br>
+                Cette chambre est actuellement liée à <strong><%= nbReservations %> réservation(s)</strong>.
+                <br><br>
+                Si vous confirmez la suppression, cela entraînera une erreur de base de données ou supprimera l'historique des réservations (selon la configuration).
+                <br>
+                <em>Conseil : Il est recommandé de ne PAS la supprimer tant qu'elle est réservée.</em>
+            </div>
+        <% } %>
+
+        <form action="/chambres/delete/<%= chambres.idChambre %>" method="POST">
+            
+            <% if (nbReservations > 0) { %>
+                <button type="submit" class="btn btn-danger">Je comprends les risques, supprimer quand même</button>
+            <% } else { %>
+                <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+            <% } %>
+
+            <a href="/chambres" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+
+</body>
+</html>

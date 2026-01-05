@@ -22,7 +22,10 @@ routeur.post('/update/:id', ControllerChambres.updateChambre);
 //route pour afficher une chambre par son id
 routeur.get('/:id', ControllerChambres.chambreUnique);
 
-//route pour supprimer une chambre
+// Route pour afficher le formulaire de suppression
+routeur.get('/delete/:id', ControllerChambres.formDeleteChambre);
+
+//supprimer chambre
 routeur.post('/delete/:id', ControllerChambres.deleteChambre);
 
 export default routeur;
