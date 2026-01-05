@@ -47,9 +47,7 @@
 
                             <a href="/chambres/update/<%= chambres.idChambre %>" class="btn btn-edit">Modifier</a>
 
-                            <form action="/chambres/delete/<%= chambres.idChambre %>" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer la chambre <%= chambres.numero %> ?');">
-                                <button type="submit" class="btn btn-delete">Supprimer</button>
-                            </form>
+                            <a href="/chambres/delete/<%= chambres.idChambre %>" class="btn btn-delete">Supprimer</a>
                         </td>
                     </tr>
                 <% }); %>
