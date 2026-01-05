@@ -78,6 +78,23 @@ class ModelChambres { // Création du modèle Chambre
             throw new Error('Erreur lors de la suppression de la chambre: ' + error.message);
         }
     }
+
+
+    // Vérifier si une chambre a des réservations (pour l'avertissement)
+    static async compteReservation(id) {
+        try {
+            // On compte combien de lignes dans 'reservations' ont cet idChambre
+            const [rows] = await connexion.execute(
+                'SELECT COUNT(*) as count FROM reservations WHERE idChambre = ?', 
+                [id]
+            );
+            return rows[0].count; // Retourne le nombre (ex: 0, 1, 5...)
+        } catch (error) {
+            // Si la table n'existe pas encore (si ton collègue ne l'a pas faite), on renvoie 0 pour ne pas bloquer
+            return 0; 
+        }
+    }
 }
+
 
 export default ModelChambres; // Exportation du modèle Chambre pour l'utiliser dans d'autres fichiers

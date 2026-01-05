@@ -149,6 +149,32 @@ class ControllerChambres {
         }
     }
 
+    // Afficher la page de confirmation de suppression
+    static async formDeleteChambre(req, res) {
+        try {
+            const id = req.params.id;
+            const chambres = await modelChambres.findbyid(id);
+            
+            if (!chambres) {
+                return res.status(404).send('Chambre introuvable');
+            }
+
+            // On regarde si la chambre est liée à des réservations
+            const nbReservations = await modelChambres.compteReservation(id);
+
+            // On rend la vue de confirmation de suppression
+            res.render('chambres/delete', { 
+                title: 'Supprimer la chambre', 
+                chambres,
+                nbReservations //nb de reservations liées à cette chambre
+            });
+
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Erreur serveur');
+        }
+    }
+
 }
 
 export default ControllerChambres;
