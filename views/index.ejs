@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <style>
+        /* Un style CSS minimaliste et propre pour l'accueil */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .dashboard-container {
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        /* La GROSSE case Réservation */
+        .big-box {
+            display: block;
+            background-color: #27ae60;
+            /* Vert pour l'action principale */
+            color: white;
+            text-decoration: none;
+            padding: 50px;
+            font-size: 2rem;
+            font-weight: bold;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, background-color 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .big-box:hover {
+            background-color: #219150;
+            transform: translateY(-5px);
+        }
+
+        /* Conteneur pour les deux petites cases */
+        .sub-menu {
+            display: flex;
+            gap: 20px;
+            /* Espace entre les cases */
+        }
+
+        /* Les PETITES cases (Clients & Chambres) */
+        .small-box {
+            flex: 1;
+            /* Elles prennent la même largeur */
+            background-color: #3498db;
+            /* Bleu pour l'admin */
+            color: white;
+            text-decoration: none;
+            padding: 30px;
+            font-size: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .small-box:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+        }
+
+        /* Petite distinction pour la case Chambres */
+        .box-chambres {
+            background-color: #e67e22;
+            /* Orange */
+        }
+
+        .box-chambres:hover {
+            background-color: #d35400;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <h1>🌴 <%= title %>
+        </h1>
+
+        <a href="/reservations" class="big-box">
+            📅 Gérer les Réservations
+        </a>
+
+        <div class="sub-menu">
+            <a href="/clients" class="small-box">
+                👥 Clients
+            </a>
+
+            <a href="/chambres" class="small-box box-chambres">
+                🛏️ Chambres
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>

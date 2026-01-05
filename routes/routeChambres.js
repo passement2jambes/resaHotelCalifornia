@@ -23,6 +23,6 @@ routeur.post('/update/:id', ControllerChambres.updateChambre);
 routeur.get('/:id', ControllerChambres.chambreUnique);
 
 //route pour supprimer une chambre
-//routeur.post('/delete/:id', ControllerChambres.deleteChambre);
+routeur.post('/delete/:id', ControllerChambres.deleteChambre);
 
 export default routeur;

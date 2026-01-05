@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // Fichiers statiques
 // Routes
 // Route racine
 app.get('/', (req, res) => {
-    res.render('accueil', {
+    res.render('index', {
         title: 'Hôtel California - Système de Gestion'
     });
 });

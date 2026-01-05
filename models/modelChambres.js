@@ -4,7 +4,7 @@
 import connexion from '../config/connexion.js';
 
 class ModelChambres { // Création du modèle Chambre
-    constructor(data) { // Utilisation du constructeur,data est un objet qui contient les propriétés de la chambre
+    constructor(data) { // Utilisation du constructeur,data = objet contenant les propriétés de la chambre
         this.idChambre = data.idChambre;
         this.numero = data.numero;
         this.capacite = data.capacite;
@@ -45,7 +45,7 @@ class ModelChambres { // Création du modèle Chambre
             return result.insertId; // Retourne l'ID de la nouvelle chambre créée
         }
         catch (error) {
-            if (error.code === 'ER_DUP_ENTRY') {
+            if (error.code === 'ER_DUP_ENTRY') { //erreur de doublon
                 throw new Error('Erreur : Le numéro de chambre existe déjà.');
             }
             throw new Error('Erreur lors de la création de la chambre: ' + error.message);

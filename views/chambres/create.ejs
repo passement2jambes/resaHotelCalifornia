@@ -18,6 +18,12 @@
 <body>
 
     <h1>Ajouter une nouvelle chambre</h1>
+    
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div style="background-color: #e74c3c; color: white; padding: 10px; margin-bottom: 20px; border-radius: 5px;">
+            ⚠️ <%= error %>
+        </div>
+    <% } %>
 
     <form action="/chambres/create" method="POST">
         
