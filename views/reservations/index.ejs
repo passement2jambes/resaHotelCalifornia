@@ -1,48 +1,37 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-</head>
-<body>
-  <h1><%= title %></h1>
+<h1><%= title %></h1>
 
-  <a href="/reservations/create">Ajouter une réservation</a>
+<a href="/reservations/create" style="margin-bottom: 20px; display: inline-block;">+ Ajouter une réservation</a>
 
-  <table border="1" cellpadding="5">
+<table border="1" cellpadding="10" cellspacing="0" style="width: 100%; text-align: left;">
     <thead>
-      <tr>
-        <th>ID</th>
-        <th>Client</th>
-        <th>Chambre</th>
-        <th>Date début</th>
-        <th>Date fin</th>
-        <th>Actions</th>
-      </tr>
+        <tr>
+            <th>ID</th>
+            <th>ID Client</th>
+            <th>ID Chambre</th>
+            <th>Date Début</th>
+            <th>Date Fin</th>
+            <th>Actions</th>
+        </tr>
     </thead>
     <tbody>
-      <% if (reservations && reservations.length) { %>
-        <% reservations.forEach(r => { %>
-          <tr>
-            <td><%= r.reservation_id %></td>
-            <td><%= r.idClient %></td>
-            <td><%= r.idChambre %></td>
-            <td><%= r.dateDebut %></td>
-            <td><%= r.dateFin %></td>
-            <td>
-              <a href="/reservations/<%= r.reservation_id %>/edit">Modifier</a>
-              <form action="/reservations/<%= r.reservation_id %>/delete" method="post" style="display:inline;">
-                <button type="submit">Supprimer</button>
-              </form>
-            </td>
-          </tr>
-        <% }); %>
-      <% } else { %>
-        <tr>
-          <td colspan="6">Aucune réservation trouvée.</td>
-        </tr>
-      <% } %>
+        <% if (reservations.length > 0) { %>
+            <% reservations.forEach(resa => { %>
+                <tr>
+                    <td><%= resa.reservation_id %></td>
+                    <td><%= resa.idClient %></td>
+                    <td><%= resa.idChambre %></td>
+                    <td><%= resa.dateDebut %></td>
+                    <td><%= resa.dateFin %></td>
+                    <td>
+                        <a href="/reservations/edit/<%= resa.reservation_id %>">Modifier</a> | 
+                        <a href="/reservations/delete/<%= resa.reservation_id %>" onclick="return confirm('Supprimer cette réservation ?')">Supprimer</a>
+                    </td>
+                </tr>
+            <% }) %>
+        <% } else { %>
+            <tr>
+                <td colspan="6">Aucune réservation trouvée.</td>
+            </tr>
+        <% } %>
     </tbody>
-  </table>
-</body>
-</html>
+</table>

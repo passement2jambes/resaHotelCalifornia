@@ -1,6 +1,9 @@
 import ModelReservations from '../models/modelReservations.js';
 
-class controllerReservations {
+import ModelChambres from '../models/modelChambres.js'; 
+import ModelClients from '../models/modelClients.js';
+
+class controllerReservations {  
     // Afficher toutes les réservations
  static async list(req, res) {
     try {

@@ -1,3 +1,4 @@
+
 //on commence par importer le modele
 import modelChambres from '../models/modelChambres.js';
 

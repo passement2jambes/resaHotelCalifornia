@@ -1,61 +1,50 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-</head>
-<body>
-  <h1><%= title %></h1>
+<h1><%= title %></h1>
 
-  <% if (errors && errors.length) { %>
-    <ul style="color:red;">
-      <% errors.forEach(e => { %>
-        <li><%= e %></li>
-      <% }); %>
-    </ul>
-  <% } %>
+<% if (errors.length > 0) { %>
+    <div style="color: red;">
+        <ul>
+            <% errors.forEach(error => { %>
+                <li><%= error %></li>
+            <% }) %>
+        </ul>
+    </div>
+<% } %>
 
-  <form action="/reservations/create" method="post">
+<form action="/reservations/create" method="POST">
     <div>
-      <label for="idClient">Client</label>
-      <select name="idClient" id="idClient">
-        <option value="">-- Sélectionner un client --</option>
-        <% clients.forEach(c => { %>
-          <option value="<%= c.idClient %>"
-            <%= data.idClient == c.idClient ? 'selected' : '' %>>
-            <%= c.nom %>
-          </option>
-        <% }); %>
-      </select>
+        <label>Client :</label>
+        <select name="idClient" required>
+            <option value="">-- Choisir un client --</option>
+            <% clients.forEach(client => { %>
+                <option value="<%= client.id %>" <%= data.idClient == client.id ? 'selected' : '' %>>
+                    <%= client.nom %> (ID: <%= client.id %>)
+                </option>
+            <% }) %>
+        </select>
     </div>
 
     <div>
-      <label for="idChambre">Chambre</label>
-      <select name="idChambre" id="idChambre">
-        <option value="">-- Sélectionner une chambre --</option>
-        <% chambres.forEach(ch => { %>
-          <option value="<%= ch.idChambre %>"
-            <%= data.idChambre == ch.idChambre ? 'selected' : '' %>>
-            <%= ch.numero %>
-          </option>
-        <% }); %>
-      </select>
+        <label>Chambre :</label>
+        <select name="idChambre" required>
+            <option value="">-- Choisir une chambre --</option>
+            <% chambres.forEach(chambre => { %>
+                <option value="<%= chambre.id %>" <%= data.idChambre == chambre.id ? 'selected' : '' %>>
+                    Chambre n°<%= chambre.numero %>
+                </option>
+            <% }) %>
+        </select>
     </div>
 
     <div>
-      <label for="dateDebut">Date début</label>
-      <input type="date" id="dateDebut" name="dateDebut"
-             value="<%= data.dateDebut || '' %>">
+        <label>Date de début :</label>
+        <input type="date" name="dateDebut" value="<%= data.dateDebut || '' %>" required>
     </div>
 
     <div>
-      <label for="dateFin">Date fin</label>
-      <input type="date" id="dateFin" name="dateFin"
-             value="<%= data.dateFin || '' %>">
+        <label>Date de fin :</label>
+        <input type="date" name="dateFin" value="<%= data.dateFin || '' %>" required>
     </div>
 
-    <button type="submit">Enregistrer</button>
+    <button type="submit">Enregistrer la réservation</button>
     <a href="/reservations">Annuler</a>
-  </form>
-</body>
-</html>
+</form>

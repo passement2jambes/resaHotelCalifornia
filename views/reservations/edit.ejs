@@ -1,59 +1,38 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
-</head>
-<body>
-  <h1><%= title %></h1>
+<h1><%= title %></h1>
 
-  <% if (errors && errors.length) { %>
-    <ul style="color:red;">
-      <% errors.forEach(e => { %>
-        <li><%= e %></li>
-      <% }); %>
-    </ul>
-  <% } %>
-
-  <form action="/reservations/<%= reservation.reservation_id %>/edit" method="post">
+<form action="/reservations/edit/<%= reservation.reservation_id %>" method="POST">
     <div>
-      <label for="idClient">Client</label>
-      <select name="idClient" id="idClient">
-        <% clients.forEach(c => { %>
-          <option value="<%= c.idClient %>"
-            <%= reservation.idClient == c.idClient ? 'selected' : '' %>>
-            <%= c.nom %>
-          </option>
-        <% }); %>
-      </select>
+        <label>Client :</label>
+        <select name="idClient" required>
+            <% clients.forEach(client => { %>
+                <option value="<%= client.id %>" <%= reservation.idClient == client.id ? 'selected' : '' %>>
+                    <%= client.nom %>
+                </option>
+            <% }) %>
+        </select>
     </div>
 
     <div>
-      <label for="idChambre">Chambre</label>
-      <select name="idChambre" id="idChambre">
-        <% chambres.forEach(ch => { %>
-          <option value="<%= ch.idChambre %>"
-            <%= reservation.idChambre == ch.idChambre ? 'selected' : '' %>>
-            <%= ch.numero %>
-          </option>
-        <% }); %>
-      </select>
+        <label>Chambre :</label>
+        <select name="idChambre" required>
+            <% chambres.forEach(chambre => { %>
+                <option value="<%= chambre.id %>" <%= reservation.idChambre == chambre.id ? 'selected' : '' %>>
+                    Chambre n°<%= chambre.numero %>
+                </option>
+            <% }) %>
+        </select>
     </div>
 
     <div>
-      <label for="dateDebut">Date début</label>
-      <input type="date" id="dateDebut" name="dateDebut"
-             value="<%= reservation.dateDebut.toISOString().slice(0,10) %>">
+        <label>Date de début :</label>
+        <input type="date" name="dateDebut" value="<%= reservation.dateDebut %>" required>
     </div>
 
     <div>
-      <label for="dateFin">Date fin</label>
-      <input type="date" id="dateFin" name="dateFin"
-             value="<%= reservation.dateFin.toISOString().slice(0,10) %>">
+        <label>Date de fin :</label>
+        <input type="date" name="dateFin" value="<%= reservation.dateFin %>" required>
     </div>
 
     <button type="submit">Mettre à jour</button>
     <a href="/reservations">Annuler</a>
-  </form>
-</body>
-</html>
+</form>
