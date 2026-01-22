@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import https from 'https';
+import fs from 'fs';
 
 // Import des routes
 import routeAccueil from './routes/routeAccueil.js';
@@ -49,9 +51,22 @@ app.use((req, res) => {
 });
 
 // Démarrage serveur
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Serveur démarré sur http://localhost:${PORT}`);
+//const PORT = 3000;
+
+const PORT_HTTPS = 3001 ;
+
+const sslOptions = {
+ key: fs.readFileSync(path.join(__dirname, 'ssl', 'private.key')),
+ cert: fs.readFileSync(path.join(__dirname, 'ssl', 'certificate.crt'))
+};
+
+//app.listen(PORT, () => {
+//    console.log(`Serveur démarré sur http://localhost:${PORT}`);
+//});
+
+// Serveur HTTPS (port 3001)
+const httpsServer = https.createServer(sslOptions, app).listen(PORT_HTTPS, () => {
+ console.log(` Serveur HTTPS démarré sur le port ${PORT_HTTPS}`);
 });
 
 export default app;

@@ -1,0 +1,4 @@
+securiser https avec cookie lapp web (certifiat déja fait manque plus que generer cookie et rajouter code etc)
+injections sql xss 
+tests déja faits 
+créer api et la sécuriser pareil (seule diff, https avec jwt sur l'api)
